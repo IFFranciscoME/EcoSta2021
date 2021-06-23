@@ -91,11 +91,7 @@ Western Institute of Technology and Higher Education (ITESO)}
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 
-\begin{columns}[onlytextwidth]
-  
-  \begin{column}{1 \textwidth - 0.005 \textwidth}
-    \begin{block}{Presented Case Specifications} \footnotesize
-
+\footnotesize
     \textbf{Hipothesis:}
       There exists a set of conditions under which a cross-validation process can be defined and conducted in
       order to achieve Out-Of-Sample and Out-Of-Distribution Generalization when performing a Predictive
@@ -111,11 +107,7 @@ Western Institute of Technology and Higher Education (ITESO)}
       A classification problem is formulated as to predict the target variable, $CO_{t+1}$, which is defined
       as the $\text{sign}(Close_{t+1} - Open_{t+1})$. For the explanatory variables, the base definition is to
       use only those of endogenous nature, that is, to create them using only \textbf{OHLC} values.
-  
-    \end{block}
-  \end{column}
-\end{columns}
-
+      
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 
@@ -213,6 +205,8 @@ Western Institute of Technology and Higher Education (ITESO)}
     a discrete variable prediction (classification problem), a time-based labeling can be stated as:
       
       $\hat{y}_{t} = sign \left\{ CO_{t} \right\}$
+      
+      Interesting enough, this target variable never had an imbalace of classes more than 5.5\%
 
     \end{block}
   \end{column}
@@ -224,6 +218,8 @@ Western Institute of Technology and Higher Education (ITESO)}
       $\left\{ CO \right\}_{t-k}$ for values of $k = 1, 2, ... K$, with $K$ as a proposed 
       \textit{memory} parameter. Then perform some fundamental operations: Simple Moving Average $SMA_{t}$,
       lag: $LAG_{t}$, Standard Deviation: $SD_t$ and Cumulative Sumation: $CUMSUM_{t}$.
+      
+      Then symbolic variables where generated using Genetic Programming.
 
     \end{block}
   \end{column}
@@ -386,18 +382,101 @@ Western Institute of Technology and Higher Education (ITESO)}
 \begin{columns}[onlytextwidth]
   
   \begin{column}{.25 \textwidth - 0.005 \textwidth}
-    \begin{block}{Repository}
+    \begin{block}{Train-Logistic}
         
-        For more information about the code implementation, data, and file templates go to the GitHub
-        repository for this work.
-        
-        - github.com/IFFranciscoME/EcoSta2021
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-class-train-log.png}
+      \end{figure}
         
     \end{block}
   \end{column}
   
-  \begin{column}{.75 \textwidth - 0.005 \textwidth}
-    \begin{block}{References}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{Validation-Logistic}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-class-val-log.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{Train-NeuralNet}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-class-train-mlp.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{Validation-NeuralNet}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-class-val-mlp.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+\end{columns}
+
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+
+\begin{columns}[onlytextwidth]
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{ROCs-Train-Logistic}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-rocs-logistic-train.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{ROCs-Validation-Logistic}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-rocs-logistic-val.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{ROCs-Train-NeuralNet}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-rocs-mlp-train.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{ROCs-Validation-NeuralNet}
+        
+      \begin{figure}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/plot-rocs-logistic-val.png}
+      \end{figure}
+        
+    \end{block}
+  \end{column}
+  
+\end{columns}
+
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+
+\begin{columns}[onlytextwidth]
+  
+  \begin{column}{1 \textwidth - 0.005 \textwidth}
+    \begin{block}{References} \footnotesize
     
     \begin{thebibliography}{02}
       \bibitem{Lopez-de-Prado-AFML-2018}
@@ -418,18 +497,6 @@ Western Institute of Technology and Higher Education (ITESO)}
 \end{columns}
 
 % -- -------------------------------------------------------------------------------------- ----------- -- %
-% -- -------------------------------------------------------------------------------------- ----------- -- %
-
-\begin{columns}[onlytextwidth]
-  
-  \begin{column}{1 \textwidth - 0.005 \textwidth}
-    \begin{block}{Additional Row-Block}
-        
-      Additional content inside block
-        
-    \end{block}
-  \end{column}
-\end{columns}
 
 \end{frame}
 \end{document}
