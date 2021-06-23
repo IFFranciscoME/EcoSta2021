@@ -92,8 +92,8 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{1 \textwidth - 0.01 \textwidth}
-    \begin{block}{Presented Case Specifications}
+  \begin{column}{1 \textwidth - 0.005 \textwidth}
+    \begin{block}{Presented Case Specifications} \footnotesize
 
     \textbf{Hipothesis:}
       There exists a set of conditions under which a cross-validation process can be defined and conducted in
@@ -120,8 +120,8 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.33 \textwidth - 0.01 \textwidth}
-    \begin{block}{A discrete multi-period characterization}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{A discrete representation} \footnotesize
     
       Let $V_{t}$ be the value of a financial asset at any given time $t$, and $S_{t}$ as a discrete 
       representation of $V_{t}$ if there is an observable transaction $Ts_{t}$. Similarly, if there is 
@@ -133,70 +133,44 @@
     \end{block}
   \end{column}
   
-  \begin{column}{.33 \textwidth - 0.01 \textwidth}
-  \begin{block}{OHLC representation}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+  \begin{block}{OHLC data} \footnotesize
   
-      For every $OHLC_{T}: \left\{ Open_{t}, High_{t}, Low_{t}, Close_{t} \right\}$:
-      
-      \textbf{Timestamp}: The date and time for each interval. \\
-      \textbf{Open}: The first price of the interval. \\
-      \textbf{High}: The highest price registered during the interval. \\
-      \textbf{Low}: The lowest price registered during the interval. \\
-      \textbf{Close}: The last price of the interval.
+      \textit{Timestamp}: The date and time for each interval. \\
+      \textbf{O}pen: The first price of the interval. \\
+      \textbf{H}igh: The highest price during the interval. \\
+      \textbf{L}ow: The lowest price during the interval. \\
+      \textbf{C}lose: The last price of the interval
+
+      Intra-day micro-information: \\
+     \textbf{volatility:}  $HL_{t}$ , \textbf{price-change:} $ CO_{t}$ \\
+     \textbf{uptrend:} $HO_{t}$ , \textbf{downtrend:} $ OL_{t}$
 
   \end{block}
   \end{column}
 
-  \begin{column}{.33 \textwidth - 0.01 \textwidth}
-    \begin{block}{Candlestick Visual Representation \footnotesize \textit{(Figure 1)}}
-    \vskip-.4in
-          \begin{figure}
-            \includegraphics[width=34cm, height=10cm,keepaspectratio=true]{figures/plot-ohlcprices.png}
-          \end{figure}
-    \end{block}
-  \end{column}
-
-\end{columns}
-
-% -- -------------------------------------------------------------------------------------- ----------- -- %
-% -- -------------------------------------------------------------------------------------- ----------- -- %
-
-\begin{columns}[onlytextwidth]
-  
-  \begin{column}{.25 \textwidth - 0.01 \textwidth}
-    \begin{block}{Linear Variables}
-      
-      \textbf{micro-volatility:}  $ \rightarrow HL_{t}$ \\
-      \textbf{micro-trend:} $ \rightarrow CO_{t}$ \\
-      \textbf{micro-uptrend:} $ \rightarrow HO_{t}$ \\ 
-      \textbf{micro-downtrend:} $ \rightarrow OL_{t}$
-      
-    \end{block}
-  \end{column}
-
-  \begin{column}{.5 \textwidth - 0.01 \textwidth}
-    \begin{block}{Autoregressive Variables}
-        
-      Fundamental operations: $MA_t$, lag: $LAG_t$, standard deviation: $SD_t$ and cumulative
-      sumation: $CSUM_t$. This operations where applied to the past linear features: 
-      $\left\{ OL \right\}_{t-k}$, $\left\{ HO \right\}_{t-k}$, $\left\{ HL \right\}_{t-k}$,
-      $\left\{ HLV \right\}_{t-k}$, $\left\{ COV \right\}_{t-k}$, $\left\{ VOL \right\}_{t-k}$
-      for values of $k = 1, 2, ... K$, with $K$ as a proposed \textit{memory} parameter.
-
-    \end{block}
-  \end{column}
-  
-  \begin{column}{.25 \textwidth - 0.01 \textwidth}
-    \begin{block}{Target variable}
+  \begin{column}{.5 \textwidth - 0.005 \textwidth}
+    \begin{block}{Candlestick Visual Representation \footnotesize \textit{(Figure 1)}} 
     
-      A continuous variable prediction (regression problem), into
-      a discrete variable prediction (classification problem):
+    \begin{minipage}[h]{0.25 \textwidth} \footnotesize
       
-      $\hat{y}_{t} = sign \left\{ CO_{t} \right\}$
-
+      The base calculations are: \\
+      
+      $HL_{t} = High_{t} - Low_{t}$ \\
+      $OL_{t} = Open_{t} - Low_{t}$ \\
+      $CO_{t} = Close_{t} - Open_{t}$ \\
+      $HO_{t} = High_{t} - Open_{t}$
+    
+    \end{minipage}
+    \begin{minipage}[h]{0.75 \textwidth}
+      \centering
+        \begin{figure}
+          \hfill \includegraphics[width=28cm, height=10cm,keepaspectratio=true]{figures/plot-ohlcprices.png}
+        \end{figure}
+    \end{minipage}
     \end{block}
   \end{column}
-  
+
 \end{columns}
 
 % -- -------------------------------------------------------------------------------------- ----------- -- %
@@ -204,12 +178,10 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.25 \textwidth - 0.01 \textwidth}
-    \begin{block}{T-Fold-SV \footnotesize \textit{(Steps)}}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{T-Fold-SV \footnotesize \textit{(Steps)}} \footnotesize
         
-      \footnotesize
-      
-      \textbf{1.- Fold Formation} \\
+      \textbf{1.- Folds Formation} \\
         Depends on labeling, can be calendar based.\\
       \textbf{2.- Target and Feature Engineering} \\
         In-Fold exclusive or Global and then divide.\\
@@ -223,8 +195,8 @@
     \end{block}
   \end{column}
 
-  \begin{column}{.25 \textwidth - 0.01 \textwidth}
-    \begin{block}{T-Fold-SV \footnotesize \textit{(Figure 2)}}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{1: Folds Formation \textit{(Figure 2)}} 
         
       \begin{figure}
         \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/T-Fold-SV.png}
@@ -233,8 +205,37 @@
     \end{block}
   \end{column}
   
-  \begin{column}{.5 \textwidth - 0.01 \textwidth}
-    \begin{block}{Information Representation and Sparsity Metric}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{2: Target Variable (labeling)} \footnotesize
+    
+    A continuous variable prediction (regression problem), into
+    a discrete variable prediction (classification problem), a time-based labeling can be stated as:
+      
+      $\hat{y}_{t} = sign \left\{ CO_{t} \right\}$
+
+    \end{block}
+  \end{column}
+
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{2: Feature Engineering} \footnotesize
+
+     with $\left\{ OL \right\}_{t-k}$, $\left\{ HO \right\}_{t-k}$, $\left\{ HL \right\}_{t-k}$,
+      $\left\{ CO \right\}_{t-k}$ for values of $k = 1, 2, ... K$, with $K$ as a proposed 
+      \textit{memory} parameter. Then perform some fundamental operations: Simple Moving Average $SMA_{t}$,
+      lag: $LAG_{t}$, Standard Deviation: $SD_t$ and Cumulative Sumation: $CUMSUM_{t}$.
+
+    \end{block}
+  \end{column}
+  
+\end{columns}
+
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+
+\begin{columns}[onlytextwidth]
+  
+  \begin{column}{.5 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.1: Information Representation and Sparsity Metric}
     
     \footnotesize
     A gamma distribution to fit the PDF of two set of variables, and the Kullback-Leibler Divergence to measure 
@@ -254,6 +255,21 @@
     \end{block}
   \end{column}
   
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.2: Information Tensor \footnotesize } \footnotesize
+        
+      
+    \end{block}
+  \end{column}
+
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.3: Tensor Characterization } \footnotesize
+        
+
+    \end{block}
+  \end{column}
+  
+  
 \end{columns}
 
 % -- -------------------------------------------------------------------------------------- ----------- -- %
@@ -261,27 +277,24 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.5 \textwidth - 0.01 \textwidth}
-    \begin{block}{Predictive Modeling: Part 1}
+  \begin{column}{.5 \textwidth - 0.005 \textwidth}
+    \begin{block}{Predictive Modeling: Part 1} \footnotesize
         
       One common component of the predictive modeling process is binary-logloss cost function 
       with \textit{elasticnet} regularization:
-
-      \begin{equation}
+      \begin{equation*}
           J(w) =  J(w) + C \frac{\lambda}{m} \sum_{j=1}^n \left \lVert w_j \right\rVert_1 + (1 - C)
           \frac{\lambda}{2m} \sum_{j=1}^n \left \lVert w_j \right\rVert_2^2
-      \end{equation}
-
-      \footnotesize
-      \noindent
-      $L_{1}$: Also known as $Lasso$  \\
-      $L_{2}$: Also known as $Ridge$ \\
-      $C$: A coefficient to regulate the effect between $L_{1}$ and $L_{2}$
+      \end{equation*}
+      
+      Where $\sum_{j=1}^n \left \lVert w_j \right\rVert_1=L_{1}$ and 
+      $\sum_{j=1}^n \left \lVert w_j \right\rVert_2^2=L_{2}$ are also known as $Lasso$ and $Ridge$
+      respectively, with $C$ as the coefficient to regulate the effect between the two.
         
     \end{block}
   \end{column}
 
-  \begin{column}{.5 \textwidth - 0.01 \textwidth}
+  \begin{column}{.5 \textwidth - 0.005 \textwidth}
     \begin{block}{Predictive Modeling: Part 2}
     
       Two models were defined, Logistic-Regression and Multi-layer Feedforward Perceptron. 
@@ -328,7 +341,7 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.25 \textwidth - 0.01 \textwidth}
+  \begin{column}{.25 \textwidth - 0.005 \textwidth}
     \begin{block}{Repository}
         
         For more information about the code implementation, data, and file templates go to the GitHub
@@ -339,7 +352,7 @@
     \end{block}
   \end{column}
   
-  \begin{column}{.75 \textwidth - 0.01 \textwidth}
+  \begin{column}{.75 \textwidth - 0.005 \textwidth}
     \begin{block}{References}
     
     \begin{thebibliography}{02}
@@ -365,7 +378,7 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{1 \textwidth - 0.01 \textwidth}
+  \begin{column}{1 \textwidth - 0.005 \textwidth}
     \begin{block}{Additional Row-Block}
         
       Additional content inside block
