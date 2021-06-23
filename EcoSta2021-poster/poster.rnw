@@ -121,12 +121,10 @@ knit_hooks$set(inline = function(x) {
   \end{column}
 
   \begin{column}{.33 \textwidth - 0.01 \textwidth}
-    \begin{block}{Candlestick Visual Representation}
+    \begin{block}{Candlestick Visual Representation \footnotesize \textit{(Figure 1)}}
     \vskip-.4in
           \begin{figure}
-            \includegraphics[width=34cm, height=9cm,keepaspectratio=true]{figures/plot-ohlcprices.png}
-            \caption{\footnotesize OHLC Prices Representation}
-            \label{ohlcprices}
+            \includegraphics[width=34cm, height=10cm,keepaspectratio=true]{figures/plot-ohlcprices.png}
           \end{figure}
     \end{block}
   \end{column}
@@ -138,41 +136,94 @@ knit_hooks$set(inline = function(x) {
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.15 \textwidth - 0.01 \textwidth}
-    \begin{block}{Type 1}
+  \begin{column}{.25 \textwidth - 0.01 \textwidth}
+    \begin{block}{Linear Variables}
+      
+      \textbf{micro-volatility:}  $ \rightarrow HL_{t}$ \\
+      \textbf{micro-trend:} $ \rightarrow CO_{t}$ \\
+      \textbf{micro-uptrend:} $ \rightarrow HO_{t}$ \\ 
+      \textbf{micro-downtrend:} $ \rightarrow OL_{t}$
+      
+    \end{block}
+  \end{column}
+
+  \begin{column}{.5 \textwidth - 0.01 \textwidth}
+    \begin{block}{Autoregressive Variables}
         
-      A simple text to describe the type of Folds
+      Fundamental operations: $MA_t$, lag: $LAG_t$, standard deviation: $SD_t$ and cumulative
+      sumation: $CSUM_t$. This operations where applied to the past linear features: 
+      $\left\{ OL \right\}_{t-k}$, $\left\{ HO \right\}_{t-k}$, $\left\{ HL \right\}_{t-k}$,
+      $\left\{ HLV \right\}_{t-k}$, $\left\{ COV \right\}_{t-k}$, $\left\{ VOL \right\}_{t-k}$
+      for values of $k = 1, 2, ... K$, with $K$ as a proposed \textit{memory} parameter.
+
+    \end{block}
+  \end{column}
+  
+  \begin{column}{.25 \textwidth - 0.01 \textwidth}
+    \begin{block}{Target variable}
+    
+      A continuous variable prediction (regression problem), into
+      a discrete variable prediction (classification problem):
+      
+      $\hat{y}_{t} = sign \left\{ CO_{t} \right\}$
+
+    \end{block}
+  \end{column}
+  
+\end{columns}
+
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+% -- -------------------------------------------------------------------------------------- ----------- -- %
+
+\begin{columns}[onlytextwidth]
+  
+  \begin{column}{.25 \textwidth - 0.01 \textwidth}
+    \begin{block}{T-Fold-SV \footnotesize \textit{(Steps)}}
+        
+      \footnotesize
+      
+      \textbf{1.- Fold Formation} \\
+        Depends on labeling, can be calendar based.\\
+      \textbf{2.- Target and Feature Engineering} \\
+        In-Fold exclusive or Global and then divide.\\
+      \textbf{3.- Information Tensor} \\
+        To asses information sparsity among Folds.\\
+      \textbf{4.- Model Training} \\
+        Hyperparameter optimization Train-Val sets.\\
+      \textbf{5.- Generalization Assesment} \\
+        Out-Of-Sample and/or Out-Of-Distribution.
         
     \end{block}
   \end{column}
 
-  \begin{column}{.35 \textwidth - 0.01 \textwidth}
-    \begin{block}{Additional Row-Block}
+  \begin{column}{.25 \textwidth - 0.01 \textwidth}
+    \begin{block}{T-Fold-SV \footnotesize \textit{(Figure 2)}}
         
       \begin{figure}
-        \includegraphics[width=34cm, height=9cm,keepaspectratio=true]{figures/T-Fold-SV.png}
-        \caption{\footnotesize OHLC Prices Representation}
+        \includegraphics[width=18cm, height=10cm, keepaspectratio=true]{figures/T-Fold-SV.png}
       \end{figure}
         
     \end{block}
   \end{column}
   
-  \begin{column}{.15 \textwidth - 0.01 \textwidth}
-    \begin{block}{Type 2}
-        
-      A simple text to describe the type of Folds
-        
-    \end{block}
-  \end{column}
-  
-  \begin{column}{.35 \textwidth - 0.01 \textwidth}
-    \begin{block}{Additional Row-Block}
-        
-      \begin{figure}
-        \includegraphics[width=34cm, height=9cm,keepaspectratio=true]{figures/T-Fold-SV.png}
-        \caption{\footnotesize OHLC Prices Representation}
-      \end{figure}
-        
+  \begin{column}{.5 \textwidth - 0.01 \textwidth}
+    \begin{block}{Information Representation and Sparsity Metric}
+    
+    \footnotesize
+    A gamma distribution to fit the PDF of two set of variables, and the Kullback-Leibler Divergence to measure 
+    the similarity between the two:
+    \begin{equation}
+      f(x) = \frac{\beta^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1}e^{-\beta x} \quad \text{for}
+      \quad x > 0 \quad \alpha,\beta >0 
+    \end{equation}
+    
+    $\Gamma(\alpha)$: The gamma function $\forall \ \alpha \in \mathbb{Z}^+$ and the
+    $D_{KL}(P \vert\vert Q)$: Kullback-Liebler Divergence, which for unknown continuous random variables,
+    $P, Q$, or for $p, q$ as empirically adjusted Probability Density Functions (PDF) is denoted by:
+    \begin{equation}
+        D_{KL}(P \vert\vert Q) = \int_{-\infty}^{\infty} p(x) log \Big( \frac{p(x)}{q(x)} \Big) dx 
+    \end{equation}
+
     \end{block}
   \end{column}
   
@@ -282,7 +333,6 @@ knit_hooks$set(inline = function(x) {
   \end{column}
 \end{columns}
 
-% -- -------------------------------------------------------------------------------------- ----------- -- %
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 % -- -------------------------------------------------------------------------------------- ----------- -- %
 
