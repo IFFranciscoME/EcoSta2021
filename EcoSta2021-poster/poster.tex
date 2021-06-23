@@ -75,7 +75,8 @@
 \vskip4cm
 
 \author {Juan Francisco Muñoz-Elguezabal \inst{1} \and Juan Diego Sánchez-Torres \inst{1}}
-\institute {\inst{1} Western Institute of Technology and Higher Education (ITESO)}
+\institute {\inst{1} Mathematics \& Physics Department - 
+Western Institute of Technology and Higher Education (ITESO)}
 
 % -- ------------------------------------------------------------------------- CODE 1: SOME CALCULATIONS -- %
 % -- ------------------------------------------------------------------------- ------------------------- -- %
@@ -185,9 +186,9 @@
         Depends on labeling, can be calendar based.\\
       \textbf{2.- Target and Feature Engineering} \\
         In-Fold exclusive or Global and then divide.\\
-      \textbf{3.- Information Tensor} \\
+      \textbf{3.- Information matrix} \\
         To asses information sparsity among Folds.\\
-      \textbf{4.- Model Training} \\
+      \textbf{4.- Predictive Modeling} \\
         Hyperparameter optimization Train-Val sets.\\
       \textbf{5.- Generalization Assesment} \\
         Out-Of-Sample and/or Out-Of-Distribution.
@@ -234,8 +235,8 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.5 \textwidth - 0.005 \textwidth}
-    \begin{block}{3.1: Information Representation and Sparsity Metric}
+  \begin{column}{.33 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.1: Information Representation and Sparsity}
     
     \footnotesize
     A gamma distribution to fit the PDF of two set of variables, and the Kullback-Leibler Divergence to measure 
@@ -255,16 +256,44 @@
     \end{block}
   \end{column}
   
-  \begin{column}{.25 \textwidth - 0.005 \textwidth}
-    \begin{block}{3.2: Information Tensor \footnotesize } \footnotesize
+  \begin{column}{.333 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.2: Information matrix \footnotesize } \footnotesize
         
+        An \textit{Information Matrix} (IM) represents the similarity in information, for the target varible,
+        among every Fold.
+        
+      \begin{center}
+          $IM=$
+          $\begin{bmatrix}
+            {D_{KL}}_{(1, 1)} & {D_{KL}}_{(1, 2)} & \hdots            & {D_{KL}}_{(1, n)}    \\
+            {D_{KL}}_{(2, 1)} &                   &                   & \vdots               \\
+            \vdots            & \ddots            &                   & \vdots               \\
+            \vdots            &                   & \ddots            & {D_{KL}}_{(n-1, n)}  \\
+            {D_{KL}}_{(n, 1)} & \hdots            & {D_{KL}}_{(n, n-1)} & {D_{KL}}_{(n, n)}
+          \end{bmatrix}$
+      \end{center}
       
+      $D_{KL}$ is a non-conumtative operation, hence $D_{KL}(P \vert \vert Q) \neq D_{KL}(Q \vert \vert P)$. 
+      That means the \textit{Information Matrix} (IM), is not symmetric, but has 0's in its diagonal.
+        
     \end{block}
   \end{column}
 
-  \begin{column}{.25 \textwidth - 0.005 \textwidth}
-    \begin{block}{3.3: Tensor Characterization } \footnotesize
+  \begin{column}{.333 \textwidth - 0.005 \textwidth}
+    \begin{block}{3.3: Matrix Characterization } \footnotesize
         
+        If an \textit{Information Threshold} is defined, and then applied to every value in IM, then the
+        latter can be characterized according to a counting of following:
+        
+        - \textbf{Sparse}: \\ 
+            All the elements of IM are sufficient disimilar among each other. \\
+        - \textbf{Weakly Sparse}: \\
+            There exists one or more very similar pairs of elements. \\
+        - \textbf{Non-sparse}: \\
+            ALll elements are highly similar to each other.
+          
+          The ideal in theory is to have a \textit{Sparse Information Matrix} to train any model, so to use
+          non-repeated data.
 
     \end{block}
   \end{column}
@@ -277,8 +306,8 @@
 
 \begin{columns}[onlytextwidth]
   
-  \begin{column}{.5 \textwidth - 0.005 \textwidth}
-    \begin{block}{Predictive Modeling: Part 1} \footnotesize
+  \begin{column}{.40 \textwidth - 0.005 \textwidth}
+    \begin{block}{4.1: Cost Function and Regularization} \footnotesize
         
       One common component of the predictive modeling process is binary-logloss cost function 
       with \textit{elasticnet} regularization:
@@ -294,13 +323,28 @@
     \end{block}
   \end{column}
 
-  \begin{column}{.5 \textwidth - 0.005 \textwidth}
-    \begin{block}{Predictive Modeling: Part 2}
+    \begin{column}{.20 \textwidth - 0.005 \textwidth}
+      \begin{block}{4.2: Model's Params } \footnotesize
+    
+        \textbf{Logistic Regression} \\
+        - L1\_L2\_Ratio = 1.0 (Lasso)
+        - Inverse of regularization (C): 1.5
+        - Parameter repetitions (Stability): Yes
+        
+        \textbf{ANN-MLP} \\
+        - Hidden Layers: 2, 80 neurons each \\
+        - Activations: ReLU \\
+        - Dropout: 10\% all layers \\
+      
+      \end{block}
+    \end{column}
+    
+  \begin{column}{.40 \textwidth - 0.005 \textwidth}
+    \begin{block}{4.3: Results} \footnotesize
     
       Two models were defined, Logistic-Regression and Multi-layer Feedforward Perceptron. 
       
       \begin{table}[h]
-      \small
       \begin{minipage}[h]{0.49\textwidth}
         \centering
         \begin{tabular}{@{}lll@{}}
